@@ -14,7 +14,7 @@ paddle框架写的基于ERNIE的命名实体识别逻辑。主要包含**ernie+2
 
 4.**训练模型：**`python3 src/train.py config/train_conf.ini`模型会保存在paddle_pretrain_ner/model/ernie_finetune(动态图模型)和paddle_pretrain_ner/model/static_ernie(静态图模型用于推理部署) 文件夹中(脚本自动创建文件夹)
 
-5.**预测模型：**`cat input/test_data/test.txt python src/predict.py config/train_conf.ini` 预测结果会直接打印到终端，可自行重定向到指定文件。
+5.**预测模型：**`cat input/test_data/test.txt | python src/predict.py config/train_conf.ini` 预测结果会直接打印到终端，可自行重定向到指定文件。
 
 **其他:**如果遇到任何问题，可以给本人邮箱776039904@qq.com发邮件，看到都会回复。
 
