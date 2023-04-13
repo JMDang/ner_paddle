@@ -1,0 +1,1 @@
+傍晚时分，斧头帮老六后山采药发现奄奄一息的神龙	[{"chunk": "傍晚时分", "label": "时间", "start": 0, "end": 4}, {"chunk": "斧头帮", "label": "组织机构", "start": 5, "end": 8}, {"chunk": "老六", "label": "人名", "start": 8, "end": 10}, {"chunk": "后山", "label": "地点", "start": 10, "end": 12}]
