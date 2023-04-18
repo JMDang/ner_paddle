@@ -2,7 +2,7 @@
 
 ### 代码说明
 
-paddle框架写的基于ERNIE的命名实体识别逻辑。主要包含**ernie+2fc**进行半指针半标注的ner识别(优点可以覆盖实体嵌套的情况)，**ernie+crf**进行经典利用crf做最后一层进行ner识别。默认采用ernie+crf的方式训练，采用**ernie+2fc**可在[paddle_pretrain_ner/config/train_conf.ini](https://github.com/JMDang/paddle_pretrain_ner/blob/main/paddle_pretrain_ner/config/train_conf.ini)设置use_crf = false。具体使用那种模型在config中可以配置，一目了然。
+paddle框架写的基于ERNIE的命名实体识别逻辑。主要包含**ernie+2fc**进行半指针半标注的ner识别(优点可以覆盖实体嵌套的情况)，**ernie+crf**进行经典利用crf做最后一层进行ner识别。默认采用ernie+crf的方式训练，采用**ernie+2fc**可在[paddle_pretrain_ner/config/train_conf.ini](https://github.com/JMDang/paddle_pretrain_ner/blob/main/paddle_pretrain_ner/config/train_conf.ini)设置use_crf = false。此外 差分学习率  动转静推理  等配置。具体使用那种模型在config中可以配置，一目了然。
 
 ### 运行步骤
 
