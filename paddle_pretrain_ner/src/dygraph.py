@@ -26,7 +26,9 @@ def train(model,
           label_encoder,
           dev_data=None,
           epochs=5,
-          learning_rate=0.001,
+          pretrain_lr=0.001,
+          other_lr=0.001,
+          weight_decay=0.01,
           batch_size=32,
           max_seq_len=300,
           max_ensure=True,
@@ -42,9 +44,11 @@ def train(model,
 
     model.train()
     criterion = paddle.nn.loss.CrossEntropyLoss()
-    # paddle.nn.functional.cross_entropy()
-    optimizer = paddle.optimizer.Adam(learning_rate=learning_rate,
-                                      parameters=model.parameters())
+    # 统一学习率
+    # optimizer = paddle.optimizer.Adam(learning_rate=learning_rate,
+    #                                   parameters=model.parameters())
+    # 差分学习率
+    optimizer = build_optimizer(model, pretrain_lr, other_lr, weight_decay)
 
     cur_train_step = 0
     best_f1 = 0.0
@@ -242,6 +246,41 @@ def load_model(model, model_path):
         logging.info("cost time: %.4fs" % (time.time() - start_time))
     else:
         logging.info("cannot find model file: {}".format(model_path))
+
+# 差分学习率
+def build_optimizer(model, pretrain_model_lr, other_lr, weight_decay):
+
+    # 差分学习率
+    no_decay = ["bias", "layer_norm.weight"]
+    pretrain_param_optimizer = []
+    other_param_optimizer = []
+
+    for name, para in model.named_parameters():
+        space = name.split('.')
+        if space[0] == 'ernie':
+            pretrain_param_optimizer.append((name, para))
+        else:
+            other_param_optimizer.append((name, para))
+
+    optimizer_grouped_parameters = [
+        # pretrain_models
+        {"params": [p for n, p in pretrain_param_optimizer if not any(nd in n for nd in no_decay)],
+         "weight_decay": weight_decay, 'lr': pretrain_model_lr},
+        {"params": [p for n, p in pretrain_param_optimizer if any(nd in n for nd in no_decay)],
+         "weight_decay": 0.0, 'lr': pretrain_model_lr},
+
+        # other module
+        {"params": [p for n, p in other_param_optimizer if not any(nd in n for nd in no_decay)],
+         "weight_decay": weight_decay, 'lr': other_lr},
+        {"params": [p for n, p in other_param_optimizer if any(nd in n for nd in no_decay)],
+         "weight_decay": 0.0, 'lr': other_lr},
+    ]
+
+    optimizer = paddle.optimizer.Adam(learning_rate = pretrain_model_lr,
+                                      parameters = optimizer_grouped_parameters)
+
+    return optimizer
+
 
 if __name__ == "__main__":
     pass
