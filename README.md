@@ -6,9 +6,9 @@ paddle框架写的基于ERNIE的命名实体识别逻辑。主要包含**ernie+2
 
 ### 运行步骤
 
-1.**标签配置:**在[paddle_pretrain_ner/input/label.txt](https://github.com/JMDang/paddle_pretrain_ner/blob/main/paddle_pretrain_ner/input/label.txt)中进行ner的类型配置，无论双指针还是crf方式进行ner都需要根据此文件进行数据预处理。
+1.**标签配置:**在[paddle_pretrain_ner/input/label.txt](https://github.com/JMDang/paddle_pretrain_ner/blob/main/paddle_pretrain_ner/input/label.txt)中进行ner的类型配置，无论双指针还是crf方式进行ner都需要根据此文件进行数据预处理。**按照demo的格式改为自己的ner类型即可**。
 
-2.**数据准备:**在[paddle_pretrain_ner/input/train_data/train.txt](https://github.com/JMDang/paddle_pretrain_ner/blob/main/paddle_pretrain_ner/input/train_data/train.txt)中按照demo格式放入待训练的数据，两列，第一列为需要ner的文本，第二列为列表，列表的每个元素是每个实体的相关信息。同理，可在dev_data和test_data增加验证和测试数据
+2.**数据准备:**在[paddle_pretrain_ner/input/train_data/train.txt](https://github.com/JMDang/paddle_pretrain_ner/blob/main/paddle_pretrain_ner/input/train_data/train.txt)中按照demo格式放入待训练的数据，两列，第一列为需要ner的文本，第二列为列表，列表的每个元素是每个实体的相关信息。**按照demo的格式改为自己的数据即可**。同理，可在dev_data和test_data增加验证和测试数据
 
 3.**环境准备:**按照requirments.txt安装相应的包即可，修改[paddle_pretrain_ner/env.sh](https://github.com/JMDang/paddle_pretrain_ner/blob/main/paddle_pretrain_ner/env.sh)配置cuda位置和使用的gpu卡，默认0卡。然后终端执行 `source env.sh `
 
