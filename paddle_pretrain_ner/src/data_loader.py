@@ -82,7 +82,7 @@ class DataLoader:
                     cols = line.strip("\n").split('\t')
                     if len(cols) != 2:#text \t labels
                         continue
-                    text, label_entity_list = line.split('\t')
+                    text, label_entity_list = cols
                     if text.find(" ") != -1:
                         continue
                     if not label_entity_list:
