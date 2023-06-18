@@ -19,7 +19,15 @@ from paddlenlp.layers.crf import LinearChainCrf, LinearChainCrfLoss, ViterbiDeco
 from paddlenlp.metrics import ChunkEvaluator
 
 class ErnieCrfForTokenClassification(ErniePretrainedModel):
-
+    """
+    此处实现为仿照paddlenlp/transformers/ernie/modeling.py中的ErnieForSequenceClassification进行自定义类实现
+    paddlenlp2.2
+        ErnieForSequenceClassification.from_pretrained('ernie-1.0', num_classes=7, id2label=id2label)
+        参数直接原封不动透传给model，如果提前内置(ErnieForSequenceClassification.__init__).parameters中)则改变内置值，否则不生效(不报错)，但可自定义类绑定
+    paddlenlp2.4.6之后更高版本
+        ErnieForSequenceClassification.from_pretrained('ernie-1.0', num_classes=7, id2label=id2label)
+        参数直接原封不动透传给model，如果提前内置(ErnieConfig->PretrainedConfig中)则改变内置值，否则不生效(会报错)，但可自定义类绑定
+    """
     def __init__(self, ernie, num_classes=2, dropout=None):
         super(ErnieCrfForTokenClassification, self).__init__()
         self.num_classes = num_classes
