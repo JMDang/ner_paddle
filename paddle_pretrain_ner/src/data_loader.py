@@ -195,7 +195,8 @@ class DataLoader:
         data_lists = list(zip(*cur_batch_data))
 
         ids_list = data_lists[0]
-        length_list = data_lists[1]
+        #crf计算loss时会用到句子真实长度，避免出现越界错误
+        length_list = [num if num <=max_seq_len else max_seq_len for num in data_lists[1]]
         ids_array = DataLoader.batch_padding(ids_list, max_seq_len, max_ensure)
         batch_list.append(ids_array)
         batch_list.append(length_list)
