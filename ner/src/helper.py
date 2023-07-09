@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 File  :   helper.py
-Author:   dangjinming(776039904@qq.com)
+Author:   dangjinming(jmdang777@qq.com)
 Date  :   2022/3/16
 Desc  :   common func
 """
