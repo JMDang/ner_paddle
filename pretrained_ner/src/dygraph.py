@@ -88,7 +88,8 @@ def train(model,
         if model_save_path:
             logging.info("save model at epoch {}".format(cur_epoch))
             start_time = time.time()
-            paddle.save(model.state_dict(), model_save_path + "_epoch{}".format(cur_epoch))
+            paddle.save(model.state_dict(), model_save_path + "_epoch{}.pdparams".format(cur_epoch))
+            #paddle.save(optimizer.state_dict(), model_save_path + "_epoch{}.pdopt".format(cur_epoch))
             logging.info("cost time: %.4fs" % (time.time() - start_time))
 
         if dev_data:
@@ -105,7 +106,8 @@ def train(model,
                 # 如果优于最优acc 则保存为best模型
                 logging.info("cur best score, save model at epoch {} as best model".format(cur_epoch))
                 start_time = time.time()
-                paddle.save(model.state_dict(), best_model_save_path)
+                paddle.save(model.state_dict(), best_model_save_path + ".pdparams")
+                paddle.save(optimizer.state_dict(), best_model_save_path + ".pdopt")
                 logging.info("cost time: %.4fs" % (time.time() - start_time))
                 best_f1 = f1
 
