@@ -214,6 +214,7 @@ def load_model(model, model_path):
     [in] model: 已构造好的模型结构
          model_path: str, 模型地址
     """
+    model_path = model_path + ".pdparams"
     if os.path.exists(model_path):
         logging.info("load model from {}".format(model_path))
         start_time = time.time()
