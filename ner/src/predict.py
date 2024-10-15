@@ -77,7 +77,7 @@ class Predict:
                                    extended_vocab_path=self.predict_conf["DATA"]["vocab_path"]
                                    )
 
-            dygraph.load_model(model_predict, self.predict_conf["MODEL_FILE"]["model_best_path"])
+            dygraph.load_model(model_predict, self.predict_conf["MODEL_FILE"]["model_best_path"] + ".pdparams")
 
             predict_data = []
             text_list = []
