@@ -117,7 +117,7 @@ class Train:
                             extended_vocab_path=train_conf["DATA"]["vocab_path"]
                             )
 
-        dygraph.load_model(model, train_conf["MODEL_FILE"]["model_best_path"])
+        dygraph.load_model(model, train_conf["MODEL_FILE"]["model_best_path"] + ".pdparams")
 
         dygraph.train(model,
                       train_data=data_set.train_data,
@@ -168,7 +168,7 @@ class Train:
                             extended_vocab_path=train_conf["DATA"]["vocab_path"]
                             )
             
-        dygraph.load_model(model, train_conf["MODEL_FILE"]["model_best_path"])
+        dygraph.load_model(model, train_conf["MODEL_FILE"]["model_best_path"] + ".pdparams")
 
         model.eval()
         model = paddle.jit.to_static(model,
