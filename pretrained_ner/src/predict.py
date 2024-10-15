@@ -58,7 +58,7 @@ class Predict:
                 model_predict = Ernie2FcForTokenClassification.from_pretrained(self.predict_conf["ERNIE"]["pretrain_model"],
                                                                        num_classes=label_encoder.size())
 
-            dygraph.load_model(model_predict, self.predict_conf["MODEL_FILE"]["model_best_path"])
+            dygraph.load_model(model_predict, self.predict_conf["MODEL_FILE"]["model_best_path"] + ".pdparams")
 
             predict_data = []
             text_list = []
