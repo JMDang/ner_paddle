@@ -102,7 +102,7 @@ class Train:
             model = Ernie2FcForTokenClassification.from_pretrained(train_conf["ERNIE"]["pretrain_model"],
                                                                     num_classes=label_encoder.size())
         
-        dygraph.load_model(model, train_conf["MODEL_FILE"]["model_best_path"])
+        dygraph.load_model(model, train_conf["MODEL_FILE"]["model_best_path"] + ".pdparams")
 
         dygraph.train(model,
                       train_data=data_set.train_data,
@@ -136,7 +136,7 @@ class Train:
         else:
             model = Ernie2FcForTokenClassification.from_pretrained(train_conf["ERNIE"]["pretrain_model"],
                                                                    num_classes=label_encoder.size())
-        dygraph.load_model(model, train_conf["MODEL_FILE"]["model_best_path"])
+        dygraph.load_model(model, train_conf["MODEL_FILE"]["model_best_path"] + ".pdparams")
 
         model.eval()
         if train_conf["ERNIE"].getboolean("use_crf"):
